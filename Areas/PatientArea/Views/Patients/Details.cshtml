@@ -1,0 +1,18 @@
+﻿@model Patient
+
+<div class="container mt-4">
+    <h2 class="mb-3">Details</h2>
+
+    <table class="table table-bordered">
+        @foreach (var prop in Model.GetType().GetProperties())
+        {
+            <tr>
+                <th class="w-25">@prop.Name</th>
+                <td>@prop.GetValue(Model)</td>
+            </tr>
+        }
+    </table>
+
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Edit</a>
+    <a asp-action="Index" class="btn btn-secondary">Back</a>
+</div>

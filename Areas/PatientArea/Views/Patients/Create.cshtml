@@ -1,0 +1,24 @@
+﻿@model Patient
+
+<div class="container mt-4">
+    <h2 class="mb-3">Create New</h2>
+
+    <form asp-action="Create" method="post">
+        <div class="row">
+            @foreach (var prop in typeof(Patient).GetProperties())
+            {
+                if (prop.Name != "Id")
+                {
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">@prop.Name</label>
+                        <input class="form-control" asp-for="@Model.GetType().GetProperty(prop.Name).Name" />
+                        <span class="text-danger" asp-validation-for="@Model.GetType().GetProperty(prop.Name).Name"></span>
+                    </div>
+                }
+            }
+        </div>
+
+        <button type="submit" class="btn btn-success">Save</button>
+        <a asp-action="Index" class="btn btn-secondary">Back</a>
+    </form>
+</div>

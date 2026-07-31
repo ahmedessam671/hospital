@@ -1,0 +1,28 @@
+﻿@model Patient
+
+<div class="container mt-4">
+    <h2 class="mb-3">Edit</h2>
+
+    <form asp-action="Edit" method="post">
+
+        <input type="hidden" asp-for="Id" />
+
+        <div class="row">
+            @foreach (var prop in typeof(Patient).GetProperties())
+            {
+                if (prop.Name != "Id")
+                {
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">@prop.Name</label>
+                        <input class="form-control" asp-for="@prop.Name" />
+                        <span class="text-danger" asp-validation-for="@prop.Name"></span>
+                    </div>
+                }
+            }
+        </div>
+
+        <button type="submit" class="btn btn-primary">Update</button>
+        <a asp-action="Index" class="btn btn-secondary">Back</a>
+
+    </form>
+</div>
